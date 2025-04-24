@@ -1,18 +1,8 @@
-<<<<<<< HEAD
-from fastapi import FastAPI, UploadFile, File, Query
-=======
 from fastapi import FastAPI, UploadFile, File, Query, HTTPException
->>>>>>> 26d127a2e3d3e905d520a50832625de403658e5b
 from parser import extract_text_from_pdf, extract_text_from_docx, extract_entities
 import shutil
 import os
 import requests
-<<<<<<< HEAD
-
-app = FastAPI()
-
-API_KEY='h_A75Sj_WqzTTwBfIq2TUA'
-=======
 from dotenv import load_dotenv
 from google import genai
 import json
@@ -23,13 +13,10 @@ load_dotenv()
 app = FastAPI()
 
 API_KEY=os.getenv("LINKEDIN_API_KEY")
->>>>>>> 26d127a2e3d3e905d520a50832625de403658e5b
 
 UPLOAD_DIR = "uploads"
 os.makedirs(UPLOAD_DIR, exist_ok=True)
 
-<<<<<<< HEAD
-=======
 # ── Gemini setup ─────────────────────────────────────────────
 GEN_API_KEY = os.getenv("GEMINI_API_KEY")
 if not GEN_API_KEY:
@@ -37,7 +24,6 @@ if not GEN_API_KEY:
 
 client = genai.Client(api_key=GEN_API_KEY)   # or the model name you prefer
 
->>>>>>> 26d127a2e3d3e905d520a50832625de403658e5b
 @app.post("/parse-resume/")
 async def parse_resume(file: UploadFile = File(...)):
     file_location = f"{UPLOAD_DIR}/{file.filename}"
@@ -55,8 +41,6 @@ async def parse_resume(file: UploadFile = File(...)):
     result = extract_entities(text)
     return result
 
-<<<<<<< HEAD
-=======
 @app.get("/industry/")
 async def industry(industry: str = Query(..., min_length=2,
                                          description="e.g. “software”, “pharmaceuticals”")):
@@ -139,7 +123,6 @@ def gemini_to_json(raw: str):
     raise ValueError("Could not parse JSON block from Gemini reply")
 
 
->>>>>>> 26d127a2e3d3e905d520a50832625de403658e5b
 @app.get("/check-profile/")
 async def check_profile(profile_url: str = Query(..., description="LinkedIn Profile URL")):
     headers = {'Authorization': 'Bearer ' + API_KEY}

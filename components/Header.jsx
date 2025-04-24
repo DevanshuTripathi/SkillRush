@@ -3,7 +3,7 @@ import { SignedIn, SignedOut, SignInButton, SignUpButton , UserButton } from "@c
 import Link from 'next/link'
 import Image from 'next/image'
 import { Button } from "../components/ui/button";
-import { ChevronDown, FileText, GraduationCap, LayoutDashboard, PenBox, StarsIcon } from 'lucide-react';
+import { ChevronDown, FileText, GraduationCap, LayoutDashboard, PenBox, StarsIcon, ListPlus } from 'lucide-react';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -49,6 +49,12 @@ const Header = async  () => {
             <DropdownMenuItem>
               <Link href={"/resume"} className='flex items-center gap-2'> <FileText className='h-4 w-4'/>
               <span> Build resume </span>
+              </Link>
+            </DropdownMenuItem>
+            <DropdownMenuItem>
+              <Link href={"/input"} className='flex items-center gap-2'> 
+                <ListPlus className='h-4 w-4'/>
+                <span>Enter Skills</span>
               </Link>
             </DropdownMenuItem>
             <DropdownMenuItem> 

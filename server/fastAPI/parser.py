@@ -23,7 +23,11 @@ def extract_text_from_docx(file_path):
     doc = Document(file_path)
     return '\n'.join([para.text for para in doc.paragraphs])
 
+<<<<<<< HEAD
+
+=======
 # Extract details from the resume
+>>>>>>> 26d127a2e3d3e905d520a50832625de403658e5b
 def extract_entities(text):
     doc = nlp(text)
     entities = {

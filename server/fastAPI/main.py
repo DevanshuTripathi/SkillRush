@@ -42,8 +42,7 @@ async def parse_resume(file: UploadFile = File(...)):
     return result
 
 @app.get("/industry/")
-async def industry(industry: str = Query(..., min_length=2,
-                                         description="e.g. “software”, “pharmaceuticals”")):
+async def industry(industry: str = Query(..., min_length=2, description="e.g. “software”, “pharmaceuticals”")):
     """
     Analyze the current state of the <industry> industry and return structured
     insights *strictly* in the required JSON format.

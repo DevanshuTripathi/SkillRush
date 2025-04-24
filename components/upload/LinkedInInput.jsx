@@ -2,15 +2,27 @@
 import { useState } from 'react'
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
-import { Linkedin } from "lucide-react"
+import { Linkedin, Loader2 } from "lucide-react"
+import { toast } from "sonner"
+import { fetchLinkedInSkills } from '@/lib/actions/linkedin'
 
 const LinkedInInput = () => {
   const [url, setUrl] = useState('')
+  const [loading, setLoading] = useState(false)
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
-    console.log('LinkedIn URL:', url)
-    // Handle the LinkedIn URL submission here
+    setLoading(true)
+    try {
+      const skills = await fetchLinkedInSkills(url)
+      toast.success(`Found ${skills.length} skills from your profile`)
+      // Here you can handle the skills data, for example:
+      console.log('Skills:', skills)
+    } catch (error) {
+      toast.error('Failed to fetch skills from LinkedIn')
+    } finally {
+      setLoading(false)
+    }
   }
 
   return (
@@ -32,8 +44,9 @@ const LinkedInInput = () => {
           <Linkedin className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
         </div>
       </div>
-      <Button type="submit" className="w-full" disabled={!url}>
-        Import Profile
+      <Button type="submit" className="w-full" disabled={!url || loading}>
+        {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+        {loading ? 'Importing...' : 'Import Profile'}
       </Button>
     </form>
   )

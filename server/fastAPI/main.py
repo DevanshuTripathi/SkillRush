@@ -7,10 +7,17 @@ from dotenv import load_dotenv
 from google import genai
 import json
 import re
+from fastapi.middleware.cors import CORSMiddleware
 
 load_dotenv()
 
 app = FastAPI()
+
+origins = [
+    "http://localhost:3000",  # React dev server
+    "http://127.0.0.1:3000",
+    # Add production domain here when deploying
+]
 
 API_KEY=os.getenv("LINKEDIN_API_KEY")
 
